@@ -1,0 +1,13 @@
+---
+# deploys nginx+postgresql+django
+- name: Install nginx, postgresql, django
+  hosts: aws
+  remote_user: ubuntu
+  sudo: yes
+
+  roles:
+    - common
+    - postgresql
+    - nginx
+    - gunicorn
+    - django
