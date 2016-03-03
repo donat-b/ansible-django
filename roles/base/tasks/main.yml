@@ -1,0 +1,13 @@
+---
+
+- name: Install base packages
+  apt: name={{ item }} update_cache=yes force=yes state=installed
+  with_items:
+    - libpq-dev
+    - python-dev
+    - python-pip
+    - supervisor
+
+- name: Upgrade pip
+  pip: name=pip state=latest
+  tags: packages
