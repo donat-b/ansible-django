@@ -1,0 +1,3 @@
+db_name: "hello"
+db_user: "hello_user"
+db_password: "secret"
