@@ -1,6 +1,6 @@
 ---
 # deploys nginx+postgresql+django
-- name: Install nginx, postgresql, django
+- name: Install nginx, postgresql, django and deploy a simple helloworld app
   hosts: aws
   remote_user: ubuntu
   become: yes
