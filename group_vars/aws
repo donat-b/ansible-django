@@ -1,0 +1,4 @@
+project_name: hello
+application_name: hello_django
+
+requirements: 'requirements.yml'
