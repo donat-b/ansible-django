@@ -1,0 +1,22 @@
+---
+
+- name: Install django
+  pip: virtualenv={{ virtualenv_path }} name=django
+  tags: packages
+
+- name: helloworld app
+  command: bin/django-admin.py startproject {{ project_name }}
+  args: 
+    chdir: "{{ virtualenv_path }}"
+    creates: "{{ project_path }}"
+
+- name: Install settings for django app
+  template: src=django.j2 dest={{ project_path }}/{{ project_name }}/settings.py
+  tags: config
+
+- name: Run migrations
+  django_manage:
+    command: migrate
+    app_path: "{{ project_path }}"
+    virtualenv: "{{ virtualenv_path }}"
+  environment: "{{ django_environment }}"
