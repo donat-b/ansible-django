@@ -1,0 +1,13 @@
+---
+
+- name: Install gunicorn
+  pip: virtualenv={{ virtualenv_path }} name=gunicorn
+  tags: packages
+
+- name: Install gunicorn init file
+  template: src=gunicorn.conf.j2 dest=/etc/init/gunicorn.conf
+  notify: 
+  - restart gunicorn
+
+- name: Ensure gunicorn service is started and enabled
+  service: name=gunicorn state=started enabled=yes

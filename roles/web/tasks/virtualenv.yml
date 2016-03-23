@@ -1,11 +1,9 @@
 ---
 
-- name: Install virtualenv
-  pip: name=virtualenv
-
 - name: Create the virtualenv
   command: virtualenv {{ virtualenv_path }} --no-site-packages
            creates={{ virtualenv_path }}/bin/activate
 
-- name: Install gunicorn
-  pip: virtualenv={{ virtualenv_path }} name=gunicorn
+- name: Install psycopg2
+  pip: virtualenv={{ virtualenv_path }} name=psycopg2
+  tags: packages
