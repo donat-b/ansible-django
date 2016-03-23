@@ -9,10 +9,6 @@
 - name: Creates directory
   file: path={{ virtualenv_path }} state=directory owner={{ gunicorn_user }} group={{ gunicorn_group }}
 
-- include: gunicorn.yml
-
-- include: nginx.yml
-
 - include: virtualenv.yml
   become: yes
   become_user: "{{ gunicorn_user }}"
@@ -22,3 +18,7 @@
   become: yes
   become_user: "{{ gunicorn_user }}"
   become_method: sudo
+
+- include: gunicorn.yml
+
+- include: nginx.yml
