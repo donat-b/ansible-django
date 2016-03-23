@@ -1,3 +1,24 @@
 ---
 
+- name: Create the application group
+  group: name={{ gunicorn_group }} state=present
+
+- name: Create the application user
+  user: name={{ gunicorn_user }} groups={{ gunicorn_group }} state=present
+
+- name: Creates directory
+  file: path={{ virtualenv_path }} state=directory owner={{ gunicorn_user }} group={{ gunicorn_group }}
+
+- include: gunicorn.yml
+
+- include: nginx.yml
+
 - include: virtualenv.yml
+  become: yes
+  become_user: "{{ gunicorn_user }}"
+  become_method: sudo
+
+- include: django.yml
+  become: yes
+  become_user: "{{ gunicorn_user }}"
+  become_method: sudo
