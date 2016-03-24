@@ -6,7 +6,7 @@
 - name: Create the application user
   user: name={{ gunicorn_user }} groups={{ gunicorn_group }} state=present
 
-- name: Creates directory
+- name: Create virtualenv directory
   file: path={{ virtualenv_path }} state=directory owner={{ gunicorn_user }} group={{ gunicorn_group }}
 
 - include: virtualenv.yml
