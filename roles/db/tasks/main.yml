@@ -1,12 +1,15 @@
 ---
+
 - name: Install PostgreSQL
   apt: name={{ item }} state=installed
   with_items:
     - postgresql
     - postgresql-contrib
     - python-psycopg2
+    - libpq-dev
+  tags: packages
 
-- name: Ensure the PostgreSQL service is running
+- name: Ensure the PostgreSQL service is running and enabled
   service: name=postgresql state=started enabled=yes
 
 - name: Create user for django, demote from super user status
