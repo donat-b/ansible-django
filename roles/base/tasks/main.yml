@@ -3,11 +3,16 @@
 - name: Install base packages
   apt: name={{ item }} update_cache=yes force=yes state=installed
   with_items:
+    - python-pip
+    # required for psycopg2
     - libpq-dev
     - python-dev
-    - python-pip
-    - supervisor
+  tags: packages
 
 - name: Upgrade pip
   pip: name=pip state=latest
+  tags: packages
+
+- name: Install virtualenv
+  pip: name=virtualenv state=latest
   tags: packages
