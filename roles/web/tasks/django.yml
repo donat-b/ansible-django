@@ -6,7 +6,7 @@
 
 - name: helloworld app
   command: bin/django-admin.py startproject {{ project_name }}
-  args: 
+  args:
     chdir: "{{ virtualenv_path }}"
     creates: "{{ project_path }}"
 
@@ -14,9 +14,19 @@
   template: src=django.j2 dest={{ project_path }}/{{ project_name }}/settings.py
   tags: config
 
+- name: Copy initial data
+  copy: src=fixtures dest={{ project_path }}
+
 - name: Run migrations
   django_manage:
     command: migrate
+    app_path: "{{ project_path }}"
+    virtualenv: "{{ virtualenv_path }}"
+  environment: "{{ django_environment }}"
+
+- name: Load initial data
+  django_manage:
+    command: loaddata fixtures/initial_data.json
     app_path: "{{ project_path }}"
     virtualenv: "{{ virtualenv_path }}"
   environment: "{{ django_environment }}"
