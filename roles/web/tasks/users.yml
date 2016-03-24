@@ -1,0 +1,7 @@
+---
+
+- name: Create the application group
+    group: name={{ gunicorn_group }} system=yes state=present
+
+- name: Create the application user
+    user: name={{ gunicorn_user }} groups={{ gunicorn_group }} state=present

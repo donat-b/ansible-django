@@ -1,0 +1,11 @@
+virtualenv_path: "/webapps/{{ application_name }}"
+
+project_path: "{{ virtualenv_path }}/{{ project_name }}"
+
+gunicorn_user: "{{ application_name }}"
+gunicorn_group: webapps
+gunicorn_socket: "{{ project_path }}/gunicorn.sock"
+
+django_environment:
+  DATABASE_USER: "{{ db_user }}"
+  DATABASE_PASSWORD: "{{ db_password }}"
