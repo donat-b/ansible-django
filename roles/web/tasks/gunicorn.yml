@@ -7,7 +7,7 @@
 - name: Install gunicorn init file
   template: src=gunicorn.conf.j2 dest=/etc/init/gunicorn.conf
   tags: config
-  notify: 
+  notify:
   - restart gunicorn
 
 - name: Ensure gunicorn service is started and enabled
